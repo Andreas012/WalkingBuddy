@@ -1,0 +1,24 @@
+Button {
+    min-width: 8vh;
+    max-height: 8vh;
+    font-size: 5vw;
+}
+
+.Menu {
+    background-color: rgba(1, 9, 10, 0.57);
+    margin: 1rem;
+    width: 91% !important;
+}
+
+.ButtonGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.inputDistance {
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}

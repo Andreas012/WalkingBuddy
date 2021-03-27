@@ -1,0 +1,11 @@
+.Map {
+    position: absolute;
+    z-index: 1;
+}
+
+.Menu {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 1500;
+}
