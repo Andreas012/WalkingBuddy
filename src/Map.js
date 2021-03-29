@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Menu from './Menu';
-import mapboxgl, { Marker } from 'mapbox-gl';
+import mapboxgl, { Marker, maxParallelImageRequests } from 'mapbox-gl';
 import FindWaypoints from './GenerateRoute';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
@@ -14,6 +14,7 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
   const [waypoints, setWaypoints] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [routeInfo, setRouteInfo] = useState([0, 0]);
 
   const findCoordinates = async () => {
     return new Promise(resolve => {
@@ -31,6 +32,8 @@ const Map = () => {
     const newWaypoints = FindWaypoints(localStorage.getItem('lat'), localStorage.getItem('lng'), localStorage.getItem('distance'));
     waypoints[0] = newWaypoints.LatLng2;
     waypoints[1] = newWaypoints.LatLng3;
+    waypoints[2] = newWaypoints.LatLng4;
+    waypoints[3] = newWaypoints.LatLng5;
     setWaypoints([...waypoints]);
   }
 
@@ -41,8 +44,10 @@ const Map = () => {
   // Initialize map when component mounts
   useEffect(() => {
 
+
+
     async function initMap() {
-      const result = await findCoordinates();
+      var result = await findCoordinates();
 
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
@@ -65,9 +70,12 @@ const Map = () => {
         unit: 'metric'
       });
 
-      // Add navigation control (the +/- zoom buttons)
-      map.addControl(
-        new mapboxgl.NavigationControl(), 'top-right');
+      directions.on('route', (arg) => {
+        var distance = arg.route[0].distance / 100;
+        var duration = arg.route[0].duration / 60;
+        console.log(distance, duration)
+        setRouteInfo([Math.round(duration), Math.round(distance * 10) / 100]);
+      });
       map.addControl(directions, 'top-left');
       map.on('click');
       map.on('ondrag');
@@ -84,7 +92,15 @@ const Map = () => {
         for (var i = 0; i < waypoints.length; i++) {
           directions.addWaypoint(i, [waypoints[i][1], waypoints[i][0]]);
         }
+        console.log(existingRoute)
       })
+
+      setInterval(async function () {
+        result = await findCoordinates();
+        marker.setLngLat([result.coords.longitude, result.coords.latitude])
+
+      }, 1000);
+
       // Clean up on unmount
       return () => map.remove();
 
@@ -97,7 +113,7 @@ const Map = () => {
   return (
     <div>
       <div className='map-container' ref={mapContainerRef} />
-      <Menu GenerateWaypoints={GenerateWaypoints} Update={Update} />
+      <Menu GenerateWaypoints={GenerateWaypoints} Update={Update} routeInfo={routeInfo} />
     </div>
   );
 };

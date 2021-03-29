@@ -19,6 +19,10 @@
   font-weight: bold;
 }
 
+.mapboxgl-ctrl-top-left {
+  margin-left: 1.7rem;
+}
+
 .marker {
   background-image: url('./marker.png') !important;
   background-size: cover;
@@ -32,6 +36,26 @@
   display: none;
 }
 
+.mapbox-directions-route-summary {
+  display: none;
+}
+
 .mapbox-directions-instructions-wrapper {
-  max-height: 9vh;
+  max-height: 10vh;
+}
+
+.mapboxgl-ctrl-directions {
+  margin-top: 6vh !important;
+}
+
+.mapboxgl-ctrl-top-right {
+  display: none;
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
 }

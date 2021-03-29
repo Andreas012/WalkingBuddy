@@ -21,17 +21,37 @@ export default function Menu(props) {
 
     }
 
+    var distance = props.routeInfo[1];
+    var duration = props.routeInfo[0];
+
+    var hours = (duration / 60);
+    var rhours = Math.floor(hours);
+    var minutes = (hours - rhours) * 60;
+    var rminutes = Math.round(minutes);
+    if (rhours < 1) {
+        duration = rminutes + "min";
+    }
+    else {
+        duration = rhours + "h " + rminutes + "min";
+    }
+
     return (
 
         <div className="Menu">
-            <div className="inputDistance">
-                <p>{inputDistance} km</p>
+            <div className="route">
+                <p>{distance} km - {duration}</p>
             </div>
-            <div className="ButtonGroup">
-                <Button variant="danger" style={{ marginRight: '5vh' }} onClick={() => { handleInputChange('decrease') }}>-</Button>
-                <Button variant="success" onClick={() => { props.GenerateWaypoints(); props.Update() }}>Load</Button>
-                <Button variant="primary" style={{ marginLeft: '5vh' }} onClick={() => { handleInputChange('increase') }}>+</Button>
+            <div className="lower">
+                <div className="inputDistance">
+                    <p>Chosen Distance:&nbsp;&nbsp;</p>
+                    <p>{inputDistance} km</p>
+                </div>
+                <div className="ButtonGroup">
+                    <Button variant="dark" style={{ marginRight: '5vh', fontSize: '3vh' }} onClick={() => { handleInputChange('decrease') }}><strong>-</strong></Button>
+                    <Button variant="success" onClick={() => { props.GenerateWaypoints(); props.Update() }}>Load</Button>
+                    <Button variant="dark" style={{ marginLeft: '5vh', fontSize: '3vh' }} onClick={() => { handleInputChange('increase') }}><strong>+</strong></Button>
 
+                </div>
             </div>
         </div>
 

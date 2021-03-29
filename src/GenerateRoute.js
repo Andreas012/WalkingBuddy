@@ -13,6 +13,8 @@ export default function FindWaypoints(lat, lng, distance) {
     var e = i + p * Math.sin(d + k) / c;
     var LatLng2 = [(n * 180 / Math.PI), (g * 180 / Math.PI)];
     var LatLng3 = [(l * 180 / Math.PI), (e * 180 / Math.PI)];
+    var LatLng4 = [(l * 180 / Math.PI), (e * 180 / Math.PI)];
+    var LatLng5 = [(l * 180 / Math.PI), (e * 180 / Math.PI)];
 
-    return { LatLng2, LatLng3 };
+    return { LatLng2, LatLng3, LatLng4, LatLng5 };
 }

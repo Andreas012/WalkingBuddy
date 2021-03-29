@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 Button {
     min-width: 8vh;
     max-height: 8vh;
     font-size: 5vw;
 }
 
+p {
+    margin-bottom: 0 !important;
+}
+
 .Menu {
-    background-color: rgba(1, 9, 10, 0.57);
     margin: 1rem;
     width: 91% !important;
+    font-family: 'raleway';
+}
+
+.lower {
+    background-color: rgb(31, 34, 34);
+    padding-bottom: 1vh;
+    border-radius: 1rem;
 }
 
 .ButtonGroup {
@@ -18,7 +30,24 @@ Button {
 }
 
 .inputDistance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
     text-align: center;
     font-weight: 600;
     color: white;
+}
+
+.route {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    margin-bottom: 2px;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(31, 34, 34);
+    border-radius: 1rem;
 }
